@@ -1,0 +1,8 @@
+.a4{
+    height: 297mm;
+    width: 210mm;
+}
+
+.a4-aspect{
+    aspect-ratio: 1/1.41;
+}
