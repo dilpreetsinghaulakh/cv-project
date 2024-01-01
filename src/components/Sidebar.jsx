@@ -1,5 +1,6 @@
-import DataBtn from "./sidebar/dataBtn";
-import Info from "./sidebar/info";
+import DataBtn from "./sidebar/DataBtn";
+import Info from "./sidebar/Info";
+import PersonalDetails from "./sidebar/PersonalDetails.jsx";
 
 export default function Sidebar() {
   return (
@@ -10,6 +11,7 @@ export default function Sidebar() {
       <div className=" gradient-blur w-full xl:max-w-2xl h-screen p-4 fixed top-0 left-0 -z-10"></div>
       <Info />
       <DataBtn />
+      <PersonalDetails />
     </section>
   );
 }
