@@ -9,6 +9,8 @@ function App() {
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
 
+  const [educationalDetails, setEducationalDetails] = useState([]);
+
   return (
     <main className="flex flex-col xl:flex-row">
       <Sidebar
@@ -18,6 +20,7 @@ function App() {
           phone: [phone, setPhone],
           city: [city, setCity],
         }}
+        educationalDetails={[educationalDetails, setEducationalDetails]}
       />
       <Output
         personalDetails={{
@@ -26,6 +29,7 @@ function App() {
           phone: phone,
           city: city,
         }}
+        educationalDetails={educationalDetails}
       />
     </main>
   );
