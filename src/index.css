@@ -27,14 +27,9 @@ body {
   /*linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px)*/ /* grid pattern */
 }
 
-.gradient-blur > div,
-.gradient-blur::before,
-.gradient-blur::after {
+.gradient-blur::before {
   position: absolute;
   inset: 0;
-}
-
-.gradient-blur::before {
   content: "";
   z-index: 1;
   backdrop-filter: blur(2px);

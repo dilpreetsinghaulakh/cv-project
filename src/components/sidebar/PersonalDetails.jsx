@@ -12,7 +12,7 @@ export default function PersonalDetails({ name, email, phone, city }) {
         Personal Details
       </h1>
 
-      <div className="flex flex-col gap-7 mt-2">
+      <div className="flex flex-col gap-2">
         <Input
           name="Name"
           id="name"
