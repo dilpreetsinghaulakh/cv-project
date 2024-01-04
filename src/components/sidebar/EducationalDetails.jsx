@@ -5,9 +5,31 @@ import PropTypes from "prop-types";
 // FORMAT
 // [{school: "", degree:"", startDate:"", endDate:"", location:""}] | array of objects
 
-function getButtonStyle(color) {
-  return `bg-${color}-500/5 text-${color}-700 dark:text-${color}-500 hover:bg-${color}-500/10 hover:text-${color}-800 dark:hover:text-${color}-400 focus-visible:outline-${color}-500 active:scale-[.99] outline-none transition-colors py-3 rounded-lg flex-grow flex items-center justify-center gap-2 font-bold`;
+function ButtonWithIcon({ text, iconClasses, color, onClick }) {
+  let classes =
+    "active:scale-[.99] outline-none transition-colors py-3 rounded-lg flex-grow flex items-center justify-center gap-2 font-bold ";
+
+  classes +=
+    color === "blue"
+      ? "bg-blue-500/5 text-blue-700 dark:text-blue-500 hover:bg-blue-500/10 hover:text-blue-800 dark:hover:text-blue-400 focus-visible:outline-blue-500"
+      : color === "emerald"
+      ? "bg-emerald-500/5 text-emerald-700 dark:text-emerald-500 hover:bg-emerald-500/10 hover:text-emerald-800 dark:hover:text-emerald-400 focus-visible:outline-emerald-500"
+      : color === "red"
+      ? "bg-red-500/5 text-red-700 dark:text-red-500 hover:bg-red-500/10 hover:text-red-800 dark:hover:text-red-400 focus-visible:outline-red-500"
+      : "";
+  return (
+    <button className={classes} onClick={() => onClick()}>
+      <i className={iconClasses} />
+      {text}
+    </button>
+  );
 }
+ButtonWithIcon.propTypes = {
+  text: PropTypes.string.isRequired,
+  iconClasses: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 function EducationalDetailsForm({
   educationalDetails,
@@ -100,24 +122,24 @@ function EducationalDetailsForm({
 
       {index[0] >= 0 ? (
         <div className="flex gap-2">
-          <button
-            className={getButtonStyle("red")}
+          <ButtonWithIcon
+            text="Delete"
+            color="red"
+            iconClasses="ci-Trash_Full text-xl"
             onClick={() => {
               let newEducationalDetails = [...educationalDetails];
               newEducationalDetails.splice(index[0], 1);
               setEducationalDetails(newEducationalDetails);
-
               setIsEditing(false);
-
               index[1]([]);
             }}
-          >
-            <i className="ci-Trash_Full text-xl" />
-            Delete
-          </button>
-          <button
-            className={getButtonStyle("blue")}
-            onClick={() => {
+          />
+
+          <ButtonWithIcon
+            text="Save"
+            color="blue"
+            iconClasses="ci-Save text-xl"
+            onClick={() =>
               handleClick(
                 educationalDetails,
                 index[0],
@@ -130,18 +152,15 @@ function EducationalDetailsForm({
                   endDate: endDate,
                   location: location,
                 }
-              );
-              index[1]([]);
-            }}
-          >
-            <i className="ci-Save text-xl" />
-            Save
-          </button>
+              )
+            }
+          />
         </div>
       ) : (
-        <button
-          className={getButtonStyle("blue")}
-          onClick={() => {
+        <ButtonWithIcon
+          text="Save"
+          color="blue"
+          onClick={() =>
             handleClick(
               educationalDetails,
               index[0],
@@ -154,13 +173,10 @@ function EducationalDetailsForm({
                 endDate: endDate,
                 location: location,
               }
-            );
-            index[1]([]);
-          }}
-        >
-          <i className="ci-Save text-xl" />
-          Save
-        </button>
+            )
+          }
+          iconClasses="ci-Save text-xl"
+        />
       )}
     </div>
   );
@@ -203,15 +219,12 @@ function EducationalDetailsList({
           </p>
         )}
       </div>
-      <button
-        className={getButtonStyle("emerald")}
-        onClick={() => {
-          setIsEditing(true);
-        }}
-      >
-        <i className="ci-Add_Plus text-xl font-bold" />
-        Add Education Details
-      </button>
+      <ButtonWithIcon
+        text="Add Education Details"
+        color="emerald"
+        onClick={() => setIsEditing(true)}
+        iconClasses="ci-Add_Plus text-xl font-bold"
+      />
     </>
   );
 }
