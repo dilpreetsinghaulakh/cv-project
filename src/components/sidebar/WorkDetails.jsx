@@ -31,11 +31,11 @@ ButtonWithIcon.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-function WorkDetailsForm({ WorkDetails, setWorkDetails, setIsEditing, index }) {
+function WorkDetailsForm({ workDetails, setWorkDetails, setIsEditing, index }) {
   let prevData;
 
   if (index[0] >= 0) {
-    prevData = WorkDetails[index[0]];
+    prevData = workDetails[index[0]];
   } else {
     prevData = {
       company: "",
@@ -55,14 +55,14 @@ function WorkDetailsForm({ WorkDetails, setWorkDetails, setIsEditing, index }) {
   const [description, setDescription] = useState(prevData.description);
 
   function saveDetails(
-    WorkDetails,
+    workDetails,
     index,
     setWorkDetails,
     setIsEditing,
     newData
   ) {
     if (index[0] >= 0) {
-      let newWorkDetails = [...WorkDetails];
+      let newWorkDetails = [...workDetails];
       newWorkDetails[index[0]] = newData;
       setWorkDetails(newWorkDetails);
       index[1]([]);
@@ -131,7 +131,7 @@ function WorkDetailsForm({ WorkDetails, setWorkDetails, setIsEditing, index }) {
             color="red"
             iconClasses="ci-Trash_Full text-xl"
             onClick={() => {
-              let newWorkDetails = [...WorkDetails];
+              let newWorkDetails = [...workDetails];
               newWorkDetails.splice(index[0], 1);
               setWorkDetails(newWorkDetails);
               setIsEditing(false);
@@ -154,12 +154,13 @@ function WorkDetailsForm({ WorkDetails, setWorkDetails, setIsEditing, index }) {
           color="blue"
           iconClasses="ci-Save text-xl"
           onClick={() =>
-            saveDetails(WorkDetails, index, setWorkDetails, setIsEditing, {
+            saveDetails(workDetails, index, setWorkDetails, setIsEditing, {
               company: company,
               position: position,
               startDate: startDate,
               endDate: endDate,
               location: location,
+              description: description,
             })
           }
         />
@@ -169,18 +170,18 @@ function WorkDetailsForm({ WorkDetails, setWorkDetails, setIsEditing, index }) {
 }
 
 WorkDetailsForm.propTypes = {
-  WorkDetails: PropTypes.array.isRequired,
+  workDetails: PropTypes.array.isRequired,
   index: PropTypes.array,
   setWorkDetails: PropTypes.func.isRequired,
   setIsEditing: PropTypes.func.isRequired,
 };
 
-function WorkDetailsList({ WorkDetails, setIsEditing, setDataToEdit }) {
+function WorkDetailsList({ workDetails, setIsEditing, setDataToEdit }) {
   return (
     <>
       <div key="main" className="flex flex-col gap-2">
-        {WorkDetails && WorkDetails.length > 0 ? (
-          WorkDetails.map((detail, index) => (
+        {workDetails && workDetails.length > 0 ? (
+          workDetails.map((detail, index) => (
             <button
               key={index}
               className="border bg-gray-50 dark:border-neutral-700 dark:bg-neutral-800 focus:border-gray-500 active:border-neutral-500 dark:focus:border-neutral-400 dark:active:border-gray-400 p-3 rounded-lg flex justify-between items-center gap-2 transition-colors"
@@ -211,7 +212,7 @@ function WorkDetailsList({ WorkDetails, setIsEditing, setDataToEdit }) {
   );
 }
 WorkDetailsList.propTypes = {
-  WorkDetails: PropTypes.array,
+  workDetails: PropTypes.array,
   setIsEditing: PropTypes.func,
   setDataToEdit: PropTypes.func,
 };
@@ -227,20 +228,20 @@ export default function WorkDetails({ workDetails, setWorkDetails }) {
       </h1>
       {!isEditing ? (
         <WorkDetailsList
-          WorkDetails={workDetails}
+          workDetails={workDetails}
           setIsEditing={setIsEditing}
           setDataToEdit={setDataToEditIndex}
         />
       ) : dataToEditIndex ? (
         <WorkDetailsForm
           index={[dataToEditIndex[0], setDataToEditIndex]}
-          WorkDetails={workDetails}
+          workDetails={workDetails}
           setWorkDetails={setWorkDetails}
           setIsEditing={setIsEditing}
         />
       ) : (
         <WorkDetailsForm
-          WorkDetails={workDetails}
+          workDetails={workDetails}
           setWorkDetails={setWorkDetails}
           setIsEditing={setIsEditing}
         />
