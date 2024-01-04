@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/exo": "^5.0.17",
+    "@fontsource/gruppo": "^5.0.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

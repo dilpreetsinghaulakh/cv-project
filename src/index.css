@@ -1,3 +1,6 @@
+@import "@fontsource/gruppo";
+@import '@fontsource-variable/exo';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
