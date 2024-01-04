@@ -8,6 +8,7 @@ export default function Input({
   type = "text",
   keyboard = "text",
   onInputChange,
+  textArea,
 }) {
   Input.defaultProps = {
     type: "text",
@@ -20,18 +21,34 @@ export default function Input({
       >
         {name}
       </label>
-      <input
-        type={type}
-        name={name}
-        id={id}
-        placeholder={placeholder}
-        value={value}
-        inputMode={keyboard}
-        onInput={(e) => {
-          onInputChange && onInputChange(e.target.value);
-        }}
-        className="w-full border border-gray-300 dark:border-neutral-700 focus:border-blue-500 focus:shadow-lg focus:shadow-blue-500/25 rounded-lg py-2 px-3 outline-none bg-white dark:bg-neutral-900 dark:text-gray-200 dark:placeholder-gray-400 transition-colors"
-      />
+      {!textArea ? (
+        <input
+          type={type}
+          name={name}
+          id={id}
+          placeholder={placeholder}
+          value={value}
+          inputMode={keyboard}
+          onInput={(e) => {
+            onInputChange && onInputChange(e.target.value);
+          }}
+          className="w-full border border-gray-300 dark:border-neutral-700 focus:border-blue-500 focus:shadow-lg focus:shadow-blue-500/25 rounded-lg py-2 px-3 outline-none bg-white dark:bg-neutral-900 dark:text-gray-200 dark:placeholder-gray-400 transition-colors"
+        />
+      ) : (
+        <textarea
+          type={type}
+          name={name}
+          id={id}
+          placeholder={placeholder}
+          value={value}
+          inputMode={keyboard}
+          rows={3}
+          onInput={(e) => {
+            onInputChange && onInputChange(e.target.value);
+          }}
+          className="w-full border border-gray-300 dark:border-neutral-700 focus:border-blue-500 focus:shadow-lg focus:shadow-blue-500/25 rounded-lg py-2 px-3 outline-none bg-white dark:bg-neutral-900 dark:text-gray-200 dark:placeholder-gray-400 transition-colors"
+        />
+      )}
     </div>
   );
 }
@@ -43,4 +60,5 @@ Input.propTypes = {
   type: PropTypes.string,
   keyboard: PropTypes.string,
   onInputChange: PropTypes.func,
+  textArea: PropTypes.bool,
 };
