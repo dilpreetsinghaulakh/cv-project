@@ -3,6 +3,7 @@ import EducationalDetails from "./sidebar/EducationalDetails.jsx";
 import Info from "./sidebar/Info";
 import PersonalDetails from "./sidebar/PersonalDetails.jsx";
 import PropTypes from "prop-types";
+import WorkDetails from "./sidebar/WorkDetails.jsx";
 
 export default function Sidebar(props) {
   return (
@@ -23,6 +24,10 @@ export default function Sidebar(props) {
         educationalDetails={props.educationalDetails[0]}
         setEducationalDetails={props.educationalDetails[1]}
       />
+      <WorkDetails
+        workDetails={props.workDetails[0]}
+        setWorkDetails={props.workDetails[1]}
+      />
     </section>
   );
 }
@@ -30,4 +35,5 @@ export default function Sidebar(props) {
 Sidebar.propTypes = {
   personalDetails: PropTypes.object,
   educationalDetails: PropTypes.array,
+  workDetails: PropTypes.array,
 };
