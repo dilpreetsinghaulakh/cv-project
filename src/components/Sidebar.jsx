@@ -5,6 +5,7 @@ import PersonalDetails from "./sidebar/PersonalDetails.jsx";
 import PropTypes from "prop-types";
 import WorkDetails from "./sidebar/WorkDetails.jsx";
 import sampleData from "./sampleData.js";
+import clearData from "./clearData.js";
 
 export default function Sidebar(props) {
   const getSets = () => {
@@ -26,6 +27,13 @@ export default function Sidebar(props) {
       <DataBtn
         fillSampleData={() =>
           sampleData(
+            setPersonalDetails,
+            props.educationalDetails[1],
+            props.workDetails[1]
+          )
+        }
+        clearForm={() =>
+          clearData(
             setPersonalDetails,
             props.educationalDetails[1],
             props.workDetails[1]
