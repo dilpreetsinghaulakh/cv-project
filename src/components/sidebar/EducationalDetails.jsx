@@ -57,19 +57,18 @@ function EducationalDetailsForm({
   const [endDate, setEndDate] = useState(prevData.endDate);
   const [location, setLocation] = useState(prevData.location);
 
-  function handleClick(
+  function saveDetails(
     educationalDetails,
     index,
     setEducationalDetails,
     setIsEditing,
     newData
   ) {
-    if (index >= 0) {
+    if (index[0] >= 0) {
       let newEducationalDetails = [...educationalDetails];
-
-      newEducationalDetails[index] = newData;
-
+      newEducationalDetails[index[0]] = newData;
       setEducationalDetails(newEducationalDetails);
+      index[1]([]);
     } else {
       setEducationalDetails([...educationalDetails, newData]);
     }
@@ -140,9 +139,9 @@ function EducationalDetailsForm({
             color="blue"
             iconClasses="ci-Save text-xl"
             onClick={() =>
-              handleClick(
+              saveDetails(
                 educationalDetails,
-                index[0],
+                index,
                 setEducationalDetails,
                 setIsEditing,
                 {
@@ -161,9 +160,9 @@ function EducationalDetailsForm({
           text="Save"
           color="blue"
           onClick={() =>
-            handleClick(
+            saveDetails(
               educationalDetails,
-              index[0],
+              index,
               setEducationalDetails,
               setIsEditing,
               {
