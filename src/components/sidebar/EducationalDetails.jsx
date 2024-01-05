@@ -119,8 +119,8 @@ function EducationalDetailsForm({
         onInputChange={(value) => setLocation(value)}
       />
 
-      {index[0] >= 0 ? (
-        <div className="flex gap-2">
+      <div className="flex gap-2">
+        {index[0] >= 0 ? (
           <ButtonWithIcon
             text="Delete"
             color="red"
@@ -133,32 +133,21 @@ function EducationalDetailsForm({
               index[1]([]);
             }}
           />
-
+        ) : (
           <ButtonWithIcon
-            text="Save"
-            color="blue"
-            iconClasses="ci-Save text-xl"
-            onClick={() =>
-              saveDetails(
-                educationalDetails,
-                index,
-                setEducationalDetails,
-                setIsEditing,
-                {
-                  school: school,
-                  degree: degree,
-                  startDate: startDate,
-                  endDate: endDate,
-                  location: location,
-                }
-              )
-            }
+            text="Cancel"
+            color="red"
+            iconClasses="ci-Close_MD text-xl"
+            onClick={() => {
+              setIsEditing(false);
+            }}
           />
-        </div>
-      ) : (
+        )}
+
         <ButtonWithIcon
           text="Save"
           color="blue"
+          iconClasses="ci-Save text-xl"
           onClick={() =>
             saveDetails(
               educationalDetails,
@@ -174,9 +163,8 @@ function EducationalDetailsForm({
               }
             )
           }
-          iconClasses="ci-Save text-xl"
         />
-      )}
+      </div>
     </div>
   );
 }
