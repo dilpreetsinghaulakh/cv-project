@@ -5,7 +5,7 @@ export default function sampleData(
 ) {
   const personalDetails = [
     "John Doe",
-    "username@icloud.com",
+    "username@email.com",
     "+0 000 000 0000",
     "Amritsar, Punjab",
   ];
